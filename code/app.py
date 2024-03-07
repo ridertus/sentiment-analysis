@@ -37,6 +37,9 @@ with open("../resource/output/vetorizer.pkl", "rb") as pickle_in:
 
 with open("../resource/output/tfidvetorizer.pkl", "rb") as pickle_in:
     tfid = pickle.load(pickle_in)
+
+with open("../resource/output/vectorizer.pkl", "rb") as pickle_in:
+    vectorizer = pickle.load(pickle_in)
   
 # Load models and vectorizer
 with open("../resource/output/linear.pkl", "rb") as pickle_in:
@@ -44,6 +47,9 @@ with open("../resource/output/linear.pkl", "rb") as pickle_in:
 
 with open("../resource/output/logistic.pkl", "rb") as pickle_in:
     model = pickle.load(pickle_in)
+
+with open("../resource/output/bayesian.pkl", "rb") as pickle_in:
+    bayesian = pickle.load(pickle_in)
 
 # Define sentiment prediction function
 def linear_analysis(text):
@@ -81,14 +87,15 @@ def logisticRegression_analysis(text):
 
 def bayesian_analysis(text):
     start = time.time()
-    vectorizer = TfidfVectorizer()
-    features = vectorizer.transform([text])
-    prediction = model.predict(features)[0]
+    preprocessed_text = customised_pre_processor(text)
+
+    features = vectorizer.transform([preprocessed_text])
+
+    prediction = bayesian.predict(features)[0]
     end = time.time()
     process_time = end - start
-
-    # Return the sentiment label and processing time
-    return "Negative" if prediction == 1 else "Positive", process_time
+    
+    return "Positive" if prediction == "positive" else "Negative", process_time
 
 # Define Streamlit app
 def Input_Output():
