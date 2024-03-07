@@ -1,3 +1,4 @@
+/home/adminuser/venv/bin/python -m pip install --upgrade pip
 nltk
 matplotlib
 seaborn
@@ -10,4 +11,3 @@ string
 time
 pandas
 wordcloud
-
