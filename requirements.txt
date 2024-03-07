@@ -3,7 +3,7 @@ streamlit
 nltk
 matplotlib
 seaborn
-sklearn
+scikit-learn
 re
 pickle
 warnings
